@@ -10,7 +10,7 @@ public class Game {
 		}
 		}
 		
-	}
+	
 	
 	public static void main(String[] args) {
 		int moveRow = StdIn.readInt();
