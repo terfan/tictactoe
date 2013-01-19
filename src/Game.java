@@ -56,7 +56,10 @@ public class Game {
         }
 
         JButton button = (JButton) drawgrid.buttons.get(name);
-        button.setBackground(new Color(17, 13, 200));
+        if (currentPlayer == 1)
+        	button.setBackground(new Color(17, 13, 200));
+        if (currentPlayer == 2)
+        	button.setBackground(new Color(170, 0, 0));
         button.setOpaque(true);
         printBoard();
     }
