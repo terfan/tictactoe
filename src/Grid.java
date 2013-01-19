@@ -39,22 +39,15 @@ public class Grid {
     }
 
     public boolean checkDiag1() {
-                if (squares[0][0].value != 0 && squares[0][0].value == squares[1][1].value
-                        && squares[1][1].value == squares[2][2].value && squares[2][2].value == squares[3][3].value) {
-                    return true;
-                }
+        if (squares[0][0].value != 0 && squares[0][0].value == squares[1][1].value && squares[1][1].value == squares[2][2].value) {
+            return true;
         }
         return false;
     }
 
     public boolean checkDiag2() {
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                if (squares[i][j].value != 0 && squares[i][j].value == squares[i + 1][j - 1].value
-                        && squares[i + 1][j - 1].value == squares[i + 2][j - 2].value && squares[i + 2][j - 2].value == squares[i + 3][j - 3].value) {
-                    return true;
-                }
-            }
+        if (squares[0][2].value != 0 && squares[0][2].value == squares[1][1].value && squares[1][1].value == squares[2][0].value) {
+            return true;
         }
         return false;
     }
