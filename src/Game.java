@@ -1,5 +1,4 @@
-import java.awt.Color;
-
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 public class Game {
@@ -56,10 +55,14 @@ public class Game {
         }
 
         JButton button = (JButton) drawgrid.buttons.get(name);
-        if (currentPlayer == 1)
-        	button.setBackground(new Color(17, 13, 200));
-        if (currentPlayer == 2)
-        	button.setBackground(new Color(170, 0, 0));
+        if (currentPlayer == 1) {
+            ImageIcon o = new ImageIcon("o.png");
+            button.setIcon(o);
+        }
+        if (currentPlayer == 2) {
+            ImageIcon x = new ImageIcon("x.png");
+            button.setIcon(x);
+        }
         button.setOpaque(true);
         printBoard();
     }
