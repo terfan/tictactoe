@@ -27,8 +27,6 @@ public class Game {
                 currentGrid = elmo.grids[squarex][squarey];
                 currentPlayer = value;
             } else {
-                if (currentGrid.isWon())
-                    System.out.println("TOFUMONKEYS");
                 int squarex = Integer.parseInt(splitted[0]);
                 int squarey = Integer.parseInt(splitted[1]);
                 if (collided == false) {
@@ -44,7 +42,8 @@ public class Game {
                 } else {
                     collided = true;
                 }
-
+                if (currentGrid.isWon())
+                    System.out.println("TOFUMONKEYS");
             }
 
             printBoard();
