@@ -4,7 +4,7 @@ public class Game {
     int currentPlayer;
     boolean collided;
 
-    public void Game() {
+    public Game() {
         currentGrid = null;
         currentPlayer = 1;
         collided = false;
@@ -29,6 +29,7 @@ public class Game {
             } else {
                 int squarex = Integer.parseInt(splitted[0]);
                 int squarey = Integer.parseInt(splitted[1]);
+           
                 if (collided == false) {
                     if (currentPlayer == 1)
                         currentPlayer = 2;
