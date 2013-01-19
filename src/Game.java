@@ -1,20 +1,14 @@
-
 public class Game {
     BigGrid elmo = new BigGrid();
     Grid currentGrid;
     int currentPlayer;
+    boolean collided;
 
     public void Game() {
         currentGrid = null;
         currentPlayer = 1;
+        collided = false;
 
-    }
-
-    public static void play(boolean player, int row, int col) {
-        if (player == true) {
-        } else {
-
-        }
     }
 
     public void start() {
@@ -33,19 +27,26 @@ public class Game {
                 currentGrid = elmo.grids[squarex][squarey];
                 currentPlayer = value;
             } else {
+                if (currentGrid.isWon())
+                    System.out.println("TOFUMONKEYS");
                 int squarex = Integer.parseInt(splitted[0]);
                 int squarey = Integer.parseInt(splitted[1]);
-                if (currentGrid.squares[squarex][squarey].value == 0){
-                   currentGrid.squares[squarex][squarey].value = currentPlayer;
-                   currentGrid = elmo.grids[squarex][squarey];
-                   if (currentPlayer == 1)
-                       currentPlayer = 2;
-                   else if (currentPlayer == 2)
-                      currentPlayer = 1;
+                if (collided == false) {
+                    if (currentPlayer == 1)
+                        currentPlayer = 2;
+                    else if (currentPlayer == 2)
+                        currentPlayer = 1;
                 }
-                
+                if (currentGrid.squares[squarex][squarey].value == 0) {
+                    currentGrid.squares[squarex][squarey].value = currentPlayer;
+                    currentGrid = elmo.grids[squarex][squarey];
+                    collided = false;
+                } else {
+                    collided = true;
+                }
+
             }
-            
+
             printBoard();
         }
     }
