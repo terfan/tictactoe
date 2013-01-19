@@ -1,3 +1,4 @@
+
 public class Game {
     BigGrid elmo = new BigGrid();
     Grid currentGrid;
@@ -34,13 +35,17 @@ public class Game {
             } else {
                 int squarex = Integer.parseInt(splitted[0]);
                 int squarey = Integer.parseInt(splitted[1]);
-                currentGrid.squares[squarex][squarey].value = currentPlayer;
-                currentGrid = elmo.grids[squarex][squarey];
+                if (currentGrid.squares[squarex][squarey].value == 0){
+                   currentGrid.squares[squarex][squarey].value = currentPlayer;
+                   currentGrid = elmo.grids[squarex][squarey];
+                   if (currentPlayer == 1)
+                       currentPlayer = 2;
+                   else if (currentPlayer == 2)
+                      currentPlayer = 1;
+                }
+                
             }
-            if (currentPlayer == 1)
-                currentPlayer = 2;
-            else if (currentPlayer == 2)
-                currentPlayer = 1;
+            
             printBoard();
         }
     }
