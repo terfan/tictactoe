@@ -1,7 +1,13 @@
+import java.awt.Color;
+
+import javax.swing.JButton;
+
 public class Game {
     BigGrid elmo = new BigGrid();
     Grid currentGrid;
     int currentPlayer;
+    int currentGridx;
+    int currentGridy;
     boolean collided;
     DrawGrid drawgrid;
 
@@ -13,6 +19,7 @@ public class Game {
 
     public void move(String input) {
         String[] splitted = input.split(",");
+        String name = null;
         if (currentGrid == null) {
             int gridx = Integer.parseInt(splitted[0]);
             int gridy = Integer.parseInt(splitted[1]);
@@ -21,6 +28,9 @@ public class Game {
 
             elmo.grids[gridx][gridy].squares[squarex][squarey].value = currentPlayer;
             currentGrid = elmo.grids[squarex][squarey];
+            currentGridx = squarex;
+            currentGridy = squarey;
+            name = currentGridx + "," + currentGridy + "," + squarex + "," + squarey;
         } else {
             int squarex = Integer.parseInt(splitted[2]);
             int squarey = Integer.parseInt(splitted[3]);
@@ -34,6 +44,9 @@ public class Game {
             if (currentGrid.squares[squarex][squarey].value == 0) {
                 currentGrid.squares[squarex][squarey].value = currentPlayer;
                 currentGrid = elmo.grids[squarex][squarey];
+                name = currentGridx + "," + currentGridy + "," + squarex + "," + squarey;
+                currentGridx = squarex;
+                currentGridy = squarey;
                 collided = false;
             } else {
                 collided = true;
@@ -42,6 +55,9 @@ public class Game {
                 System.out.println("Player " + currentPlayer + " has won!");
         }
 
+        JButton button = (JButton) drawgrid.buttons.get(name);
+        button.setBackground(new Color(17, 13, 200));
+        button.setOpaque(true);
         printBoard();
     }
 

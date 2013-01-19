@@ -1,6 +1,7 @@
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -8,6 +9,7 @@ import javax.swing.JPanel;
 
 public class DrawGrid extends JFrame implements ActionListener {
     Game game;
+    HashMap<String, JButton> buttons = new HashMap<String, JButton>();
 
     DrawGrid(Game game) {
         this.setLayout(new GridLayout(3, 3));
@@ -23,6 +25,7 @@ public class DrawGrid extends JFrame implements ActionListener {
                         button.setName(name);
                         button.addActionListener(this);
                         panel.add(button);
+                        buttons.put(name, button);
                     }
                 }
                 add(panel);
