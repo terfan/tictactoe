@@ -3,52 +3,49 @@ public class Game {
     Grid currentGrid;
     int currentPlayer;
     boolean collided;
+    DrawGrid drawgrid;
 
     public Game() {
         currentGrid = null;
         currentPlayer = 1;
         collided = false;
+    }
 
+    public void move(String input) {
+        String[] splitted = input.split(",");
+        if (currentGrid == null) {
+            int gridx = Integer.parseInt(splitted[0]);
+            int gridy = Integer.parseInt(splitted[1]);
+            int squarex = Integer.parseInt(splitted[2]);
+            int squarey = Integer.parseInt(splitted[3]);
+
+            elmo.grids[gridx][gridy].squares[squarex][squarey].value = currentPlayer;
+            currentGrid = elmo.grids[squarex][squarey];
+        } else {
+            int squarex = Integer.parseInt(splitted[2]);
+            int squarey = Integer.parseInt(splitted[3]);
+
+            if (collided == false) {
+                if (currentPlayer == 1)
+                    currentPlayer = 2;
+                else if (currentPlayer == 2)
+                    currentPlayer = 1;
+            }
+            if (currentGrid.squares[squarex][squarey].value == 0) {
+                currentGrid.squares[squarex][squarey].value = currentPlayer;
+                currentGrid = elmo.grids[squarex][squarey];
+                collided = false;
+            } else {
+                collided = true;
+            }
+            if (currentGrid.isWon())
+                System.out.println("Player " + currentPlayer + " has won!");
+        }
+
+        printBoard();
     }
 
     public void start() {
-        printBoard();
-        while (true) {
-            String input = StdIn.readString();
-            String[] splitted = input.split(",");
-            if (currentGrid == null) {
-                int gridx = Integer.parseInt(splitted[0]);
-                int gridy = Integer.parseInt(splitted[1]);
-                int squarex = Integer.parseInt(splitted[2]);
-                int squarey = Integer.parseInt(splitted[3]);
-                int value = Integer.parseInt(splitted[4]);
-
-                elmo.grids[gridx][gridy].squares[squarex][squarey].value = value;
-                currentGrid = elmo.grids[squarex][squarey];
-                currentPlayer = value;
-            } else {
-                int squarex = Integer.parseInt(splitted[0]);
-                int squarey = Integer.parseInt(splitted[1]);
-           
-                if (collided == false) {
-                    if (currentPlayer == 1)
-                        currentPlayer = 2;
-                    else if (currentPlayer == 2)
-                        currentPlayer = 1;
-                }
-                if (currentGrid.squares[squarex][squarey].value == 0) {
-                    currentGrid.squares[squarex][squarey].value = currentPlayer;
-                    currentGrid = elmo.grids[squarex][squarey];
-                    collided = false;
-                } else {
-                    collided = true;
-                }
-                if (currentGrid.isWon())
-                    System.out.println("TOFUMONKEYS");
-            }
-
-            printBoard();
-        }
     }
 
     public void printBoard() {
