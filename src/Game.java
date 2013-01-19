@@ -3,6 +3,12 @@ public class Game {
     Grid currentGrid;
     int currentPlayer;
 
+    public void Game() {
+        currentGrid = null;
+        currentPlayer = 1;
+
+    }
+
     public static void play(boolean player, int row, int col) {
         if (player == true) {
         } else {
@@ -15,15 +21,26 @@ public class Game {
         while (true) {
             String input = StdIn.readString();
             String[] splitted = input.split(",");
+            if (currentGrid == null) {
+                int gridx = Integer.parseInt(splitted[0]);
+                int gridy = Integer.parseInt(splitted[1]);
+                int squarex = Integer.parseInt(splitted[2]);
+                int squarey = Integer.parseInt(splitted[3]);
+                int value = Integer.parseInt(splitted[4]);
 
-            int gridx = Integer.parseInt(splitted[0]);
-            int gridy = Integer.parseInt(splitted[1]);
-            int squarex = Integer.parseInt(splitted[2]);
-            int squarey = Integer.parseInt(splitted[3]);
-            int value = Integer.parseInt(splitted[4]);
-
-            elmo.grids[gridx][gridy].squares[squarex][squarey].value = value;
-
+                elmo.grids[gridx][gridy].squares[squarex][squarey].value = value;
+                currentGrid = elmo.grids[squarex][squarey];
+                currentPlayer = value;
+            } else {
+                int squarex = Integer.parseInt(splitted[0]);
+                int squarey = Integer.parseInt(splitted[1]);
+                currentGrid.squares[squarex][squarey].value = currentPlayer;
+                currentGrid = elmo.grids[squarex][squarey];
+            }
+            if (currentPlayer == 1)
+                currentPlayer = 2;
+            else if (currentPlayer == 2)
+                currentPlayer = 1;
             printBoard();
         }
     }
