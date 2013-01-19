@@ -15,24 +15,22 @@ public class Grid {
     }
 
     public boolean checkHoriz() {
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                if (squares[i][j].value != 0 && squares[i][j].value == squares[i][j + 1].value && squares[i][j + 1].value == squares[i][j + 2].value) {
-                    return true;
-                }
-            }
+        
+        if (squares[0][0].value != 0 && squares[0][0].value == squares[0][1].value && squares[0][1].value == squares[0][2].value
+        		|| squares[1][0].value != 0 && squares[1][0].value == squares[1][1].value && squares[1][1].value == squares[1][2].value
+        		|| squares[2][0].value != 0 && squares[2][0].value == squares[2][1].value && squares[2][1].value == squares[2][2].value) {
+             return true;             
         }
         return false;
     }
 
     public boolean checkVert() {
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                if (squares[i][j].value != 0 && squares[i][j].value == squares[i + 1][j].value && squares[i + 1][j].value == squares[i + 2][j].value) {
-                    return true;
-                }
-            }
+        if (squares[0][0].value != 0 && squares[0][0].value == squares[1][0].value && squares[1][0].value == squares[2][0].value
+        		|| squares[0][1].value != 0 && squares[0][1].value == squares[1][1].value && squares[1][1].value == squares[2][1].value
+        		|| squares[0][2].value != 0 && squares[0][2].value == squares[1][2].value && squares[1][2].value == squares[2][2].value) {
+             return true;      
         }
+        
         return false;
     }
 
