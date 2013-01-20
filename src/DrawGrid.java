@@ -65,9 +65,9 @@ public class DrawGrid extends JFrame implements ActionListener {
                 name = gridx + "," + gridy + "," + squarex + "," + squarey;
                 JButton button = buttons.get(name);
                 if (player == 1) {
-                    button.setBorder(BorderFactory.createLineBorder(Color.BLUE));
+                    button.setBorder(BorderFactory.createLineBorder(Color.BLUE, 2));
                 } else {
-                    button.setBorder(BorderFactory.createLineBorder(Color.RED));
+                    button.setBorder(BorderFactory.createLineBorder(Color.RED, 2));
                 }
             }
         }
