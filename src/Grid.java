@@ -1,5 +1,6 @@
 public class Grid {
     Square[][] squares = new Square[3][3];
+    boolean won;
 
     public Grid() {
         for (int i = 0; i < 3; i++) {
@@ -8,6 +9,7 @@ public class Grid {
                 squares[i][j].value = 0;
             }
         }
+        this.won = false;
     }
 
     public boolean isWon() {
@@ -15,22 +17,26 @@ public class Grid {
     }
 
     public boolean checkHoriz() {
-        
-        if (squares[0][0].value != 0 && squares[0][0].value == squares[0][1].value && squares[0][1].value == squares[0][2].value
-        		|| squares[1][0].value != 0 && squares[1][0].value == squares[1][1].value && squares[1][1].value == squares[1][2].value
-        		|| squares[2][0].value != 0 && squares[2][0].value == squares[2][1].value && squares[2][1].value == squares[2][2].value) {
-             return true;             
+
+        if (squares[0][0].value != 0 && squares[0][0].value == squares[0][1].value && squares[0][1].value == squares[0][2].value) {
+            return true;
+        }
+        if (squares[1][0].value != 0 && squares[1][0].value == squares[1][1].value && squares[1][1].value == squares[1][2].value) {
+            return true;
+        }
+        if (squares[2][0].value != 0 && squares[2][0].value == squares[2][1].value && squares[2][1].value == squares[2][2].value) {
+            return true;
         }
         return false;
     }
 
     public boolean checkVert() {
-        if (squares[0][0].value != 0 && squares[0][0].value == squares[1][0].value && squares[1][0].value == squares[2][0].value
-        		|| squares[0][1].value != 0 && squares[0][1].value == squares[1][1].value && squares[1][1].value == squares[2][1].value
-        		|| squares[0][2].value != 0 && squares[0][2].value == squares[1][2].value && squares[1][2].value == squares[2][2].value) {
-             return true;      
+        if (squares[0][0].value != 0 && squares[0][0].value == squares[1][0].value && squares[1][0].value == squares[2][0].value || squares[0][1].value != 0
+                && squares[0][1].value == squares[1][1].value && squares[1][1].value == squares[2][1].value || squares[0][2].value != 0
+                && squares[0][2].value == squares[1][2].value && squares[1][2].value == squares[2][2].value) {
+            return true;
         }
-        
+
         return false;
     }
 

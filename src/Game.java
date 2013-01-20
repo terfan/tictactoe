@@ -19,20 +19,19 @@ public class Game {
     public void move(String input) {
         String[] splitted = input.split(",");
         String name = null;
+        int squarex, squarey;
+        int gridx = 0;
+        int gridy = 0;
         if (currentGrid == null) {
-            int gridx = Integer.parseInt(splitted[0]);
-            int gridy = Integer.parseInt(splitted[1]);
-            int squarex = Integer.parseInt(splitted[2]);
-            int squarey = Integer.parseInt(splitted[3]);
+            gridx = Integer.parseInt(splitted[0]);
+            gridy = Integer.parseInt(splitted[1]);
+            squarex = Integer.parseInt(splitted[2]);
+            squarey = Integer.parseInt(splitted[3]);
 
             elmo.grids[gridx][gridy].squares[squarex][squarey].value = currentPlayer;
-            currentGrid = elmo.grids[squarex][squarey];
-            currentGridx = squarex;
-            currentGridy = squarey;
-            name = currentGridx + "," + currentGridy + "," + squarex + "," + squarey;
         } else {
-            int squarex = Integer.parseInt(splitted[2]);
-            int squarey = Integer.parseInt(splitted[3]);
+            squarex = Integer.parseInt(splitted[2]);
+            squarey = Integer.parseInt(splitted[3]);
 
             if (collided == false) {
                 if (currentPlayer == 1)
@@ -42,18 +41,23 @@ public class Game {
             }
             if (currentGrid.squares[squarex][squarey].value == 0) {
                 currentGrid.squares[squarex][squarey].value = currentPlayer;
-                currentGrid = elmo.grids[squarex][squarey];
-                name = currentGridx + "," + currentGridy + "," + squarex + "," + squarey;
-                currentGridx = squarex;
-                currentGridy = squarey;
+
+                if (!currentGrid.won && currentGrid.isWon()) {
+                    this.drawgrid.highlightGrid(currentGridx, currentGridy, currentPlayer);
+                    currentGrid.won = true;
+                }
                 collided = false;
             } else {
                 collided = true;
+                return;
             }
-            if (currentGrid.isWon())
-                System.out.println("Player " + currentPlayer + " has won!");
         }
 
+        if (currentGrid == null) {
+            name = gridx + "," + gridy + "," + squarex + "," + squarey;
+        } else {
+            name = currentGridx + "," + currentGridy + "," + squarex + "," + squarey;
+        }
         JButton button = (JButton) drawgrid.buttons.get(name);
         if (currentPlayer == 1) {
             ImageIcon o = new ImageIcon("o.png");
@@ -63,11 +67,18 @@ public class Game {
             ImageIcon x = new ImageIcon("x.png");
             button.setIcon(x);
         }
+
         button.setOpaque(true);
+
+        currentGridx = squarex;
+        currentGridy = squarey;
+        currentGrid = elmo.grids[currentGridx][currentGridy];
+
         printBoard();
     }
 
-    public void start() {
+    public void reset() {
+        this.elmo = new BigGrid();
     }
 
     public void printBoard() {

@@ -11,7 +11,6 @@ public class Main {
         grid.setVisible(true);
 
         game.drawgrid = grid;
-        game.start();
     }
 
 }
