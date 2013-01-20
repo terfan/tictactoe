@@ -84,7 +84,7 @@ public class DrawGrid extends JFrame implements ActionListener {
         } else {
             game.reset();
             for (JButton button : buttons.values()) {
-                button.setIcon(new ImageIcon("o.png"));
+                button.setIcon(new ImageIcon("blank.png"));
                 button.setBorder(BorderFactory.createLineBorder(Color.BLACK));
             }
         }
